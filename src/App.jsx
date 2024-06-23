@@ -1,18 +1,18 @@
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { useTheme } from "./composables/useTheme";
+import { AppAuth, AppRouter, AppScreen } from "./components/app";
 
-function App() {
-  const theme = createTheme({
-    palette: { mode: "light" },
-  });
-
+export default function App() {
   return (
     <div className="_app">
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={useTheme}>
         <CssBaseline />
-        <div> hauhua</div>
+        <AppScreen>
+          <AppAuth>
+            <AppRouter />
+          </AppAuth>
+        </AppScreen>
       </ThemeProvider>
     </div>
   );
 }
-
-export default App;
