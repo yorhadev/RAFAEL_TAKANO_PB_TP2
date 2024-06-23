@@ -4,9 +4,11 @@ import { default as Title } from "./SignInTitle";
 import { default as Footer } from "./SignInFooter";
 import { FormButton, FormCheckbox } from "../../form";
 import { FormController, FormTextField } from "../../form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useTextField } from "../../../composables/useForm";
 import { useEmail, useMinLen } from "../../../composables/useRules";
+import { ScreenContext } from "../../../contexts";
+import { useScreenLoading } from "../../../composables/useScreen";
 
 export default function Signin() {
   const [email, setEmail] = useState({
@@ -17,7 +19,13 @@ export default function Signin() {
     ...useTextField("password", "Senha"),
     rules: [useMinLen],
   });
-  const handleSignIn = (e) => {
+
+  const { appScreen, setAppScreen } = useContext(ScreenContext);
+
+  const handleSignIn = async (e) => {
+    setAppScreen(useScreenLoading(true));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    setAppScreen(useScreenLoading(false));
     console.log("handle sign in");
   };
 
@@ -40,6 +48,7 @@ export default function Signin() {
           helperText={email.helperText}
           autoFocus={true}
           required={true}
+          loading={appScreen.screenLoading}
           onInput={(e) => setEmail({ ...email, value: e.target.value })}
         />
         <FormTextField
@@ -49,12 +58,19 @@ export default function Signin() {
           helperText={password.helperText}
           type="password"
           required={true}
+          loading={appScreen.screenLoading}
           onInput={(e) => setPassword({ ...password, value: e.target.value })}
         />
-        <FormCheckbox label="Lembre-se de mim" />
-        <FormButton type="submit">Enviar</FormButton>
+        <FormCheckbox
+          label="Lembre-se de mim"
+          loading={appScreen.screenLoading}
+        />
+        <FormButton type="submit" loading={appScreen.screenLoading}>
+          Enviar
+        </FormButton>
       </FormController>
       <Footer />
+      {appScreen.screenLoading ? "loading" : "not-loading"}
     </Container>
   );
 }

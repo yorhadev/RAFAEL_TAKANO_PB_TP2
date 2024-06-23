@@ -4,6 +4,7 @@ export const useScreen = {
     severity: "info",
     variant: "",
   },
+  screenLoading: false,
 };
 
 export const useScreenAlert = (message, severity, variant) => {
@@ -14,5 +15,12 @@ export const useScreenAlert = (message, severity, variant) => {
       severity: severity,
       variant: variant,
     },
+  };
+};
+
+export const useScreenLoading = (loading) => {
+  return {
+    ...useScreen,
+    screenLoading: loading,
   };
 };

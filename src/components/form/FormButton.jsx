@@ -1,10 +1,12 @@
-import { Button, Grid } from "@mui/material";
+import { Button, CircularProgress, Grid } from "@mui/material";
 
 export default function FormButton({
   children,
   type = "normal",
   variant = "contained",
   fullWidth = true,
+  disabled = false,
+  loading = false,
   sx,
   xs = 12,
   sm = 12,
@@ -16,6 +18,8 @@ export default function FormButton({
         type={type}
         variant={variant}
         fullWidth={fullWidth}
+        disabled={disabled || loading}
+        startIcon={loading && <CircularProgress color="inherit" size={20} />}
         sx={sx}
         {...props}
       >
