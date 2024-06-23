@@ -70,7 +70,6 @@ export default function Signin() {
         </FormButton>
       </FormController>
       <Footer />
-      {appScreen.screenLoading ? "loading" : "not-loading"}
     </Container>
   );
 }

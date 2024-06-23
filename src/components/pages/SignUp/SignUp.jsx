@@ -4,10 +4,12 @@ import { default as Title } from "./SignUpTitle";
 import { default as Footer } from "./SignUpFooter";
 import { FormButton, FormCheckbox } from "../../form";
 import { FormController, FormTextField } from "../../form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useTextField } from "../../../composables/useForm";
 import { useEmail, useMinLen } from "../../../composables/useRules";
 import { useRequired } from "../../../composables/useRules";
+import { ScreenContext } from "../../../contexts";
+import { useScreenLoading } from "../../../composables/useScreen";
 
 export default function SignUp() {
   const [name, setName] = useState({
@@ -28,7 +30,13 @@ export default function SignUp() {
     ...useTextField("password", "Senha"),
     rules: [useMinLen],
   });
+
+  const { appScreen, setAppScreen } = useContext(ScreenContext);
+
   const handleSignUp = async (e) => {
+    setAppScreen(useScreenLoading(true));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    setAppScreen(useScreenLoading(false));
     console.log("handle sign up");
   };
 
@@ -53,6 +61,7 @@ export default function SignUp() {
           helperText={name.helperText}
           autoFocus={true}
           required={true}
+          loading={appScreen.screenLoading}
           sm={6}
           onInput={(e) => setName({ ...name, value: e.target.value })}
         />
@@ -62,6 +71,7 @@ export default function SignUp() {
           error={surname.error}
           helperText={surname.helperText}
           required={true}
+          loading={appScreen.screenLoading}
           sm={6}
           onInput={(e) => setSurname({ ...surname, value: e.target.value })}
         />
@@ -71,6 +81,7 @@ export default function SignUp() {
           error={email.error}
           helperText={email.helperText}
           required={true}
+          loading={appScreen.screenLoading}
           onInput={(e) => setEmail({ ...email, value: e.target.value })}
         />
         <FormTextField
@@ -80,10 +91,16 @@ export default function SignUp() {
           helperText={password.helperText}
           type="password"
           required={true}
+          loading={appScreen.screenLoading}
           onInput={(e) => setPassword({ ...password, value: e.target.value })}
         />
-        <FormCheckbox label="Quero receber promoções de marketing e atualizações por e-mail." />
-        <FormButton type="submit">Cadastrar</FormButton>
+        <FormCheckbox
+          label="Quero receber promoções de marketing e atualizações por e-mail."
+          loading={appScreen.screenLoading}
+        />
+        <FormButton type="submit" loading={appScreen.screenLoading}>
+          Cadastrar
+        </FormButton>
       </FormController>
       <Footer />
     </Container>
