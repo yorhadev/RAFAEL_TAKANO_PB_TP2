@@ -8,7 +8,9 @@ import { useContext, useState } from "react";
 import { useTextField } from "../../../composables/useForm";
 import { useEmail, useMinLen } from "../../../composables/useRules";
 import { ScreenContext } from "../../../contexts";
+import { useScreenAlert } from "../../../composables/useScreen";
 import { useScreenLoading } from "../../../composables/useScreen";
+import firebaseService from "../../../services/firebaseService";
 
 export default function Signin() {
   const [email, setEmail] = useState({
@@ -24,9 +26,14 @@ export default function Signin() {
 
   const handleSignIn = async (e) => {
     setAppScreen(useScreenLoading(true));
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    const { user, error } = await firebaseService.signIn(email, password);
     setAppScreen(useScreenLoading(false));
-    console.log("handle sign in");
+    if (error) {
+      setAppScreen(useScreenAlert(error, "error"));
+    }
+    if (user) {
+      setAppScreen(useScreenAlert("Usuário entrou com sucesso!", "success"));
+    }
   };
 
   return (

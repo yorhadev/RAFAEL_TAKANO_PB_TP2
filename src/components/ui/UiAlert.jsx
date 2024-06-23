@@ -9,7 +9,7 @@ export default function UiAlert({ alert }) {
 
   useEffect(() => {
     const clear = () => {
-      const cleanup = useScreenAlert("", alert.severity, alert.variant);
+      const cleanup = useScreenAlert("", alert.severity);
       setAppScreen(cleanup);
     };
 
@@ -36,7 +36,7 @@ export default function UiAlert({ alert }) {
       }}
     >
       <Collapse in={collapse}>
-        <Alert severity={alert.severity} variant={alert.variant}>
+        <Alert variant="filled" severity={alert.severity}>
           {alert.message}
         </Alert>
       </Collapse>

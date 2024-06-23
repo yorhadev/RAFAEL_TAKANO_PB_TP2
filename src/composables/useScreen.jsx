@@ -7,13 +7,12 @@ export const useScreen = {
   screenLoading: false,
 };
 
-export const useScreenAlert = (message, severity, variant) => {
+export const useScreenAlert = (message, severity) => {
   return {
     ...useScreen,
     screenAlert: {
       message: message,
       severity: severity,
-      variant: variant,
     },
   };
 };
