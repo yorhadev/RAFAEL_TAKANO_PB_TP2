@@ -8,8 +8,10 @@ import { useContext, useState } from "react";
 import { useTextField } from "../../../composables/useForm";
 import { useEmail, useMinLen } from "../../../composables/useRules";
 import { useRequired } from "../../../composables/useRules";
-import { ScreenContext } from "../../../contexts";
+import { RouterContext, ScreenContext } from "../../../contexts";
+import { useScreenAlert } from "../../../composables/useScreen";
 import { useScreenLoading } from "../../../composables/useScreen";
+import firebaseService from "../../../services/firebaseService";
 
 export default function SignUp() {
   const [name, setName] = useState({
@@ -32,12 +34,22 @@ export default function SignUp() {
   });
 
   const { appScreen, setAppScreen } = useContext(ScreenContext);
+  const { setCurrentRoute } = useContext(RouterContext);
 
   const handleSignUp = async (e) => {
     setAppScreen(useScreenLoading(true));
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    const { user, error } = await firebaseService.createUser(
+      email.value,
+      password.value
+    );
     setAppScreen(useScreenLoading(false));
-    console.log("handle sign up");
+    if (error) {
+      setAppScreen(useScreenAlert(error, "error"));
+    }
+    if (user) {
+      setAppScreen(useScreenAlert("Usuário conectado com sucesso!", "success"));
+      setCurrentRoute("Dashboard");
+    }
   };
 
   return (
