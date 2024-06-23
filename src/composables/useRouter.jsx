@@ -1,7 +1,7 @@
-import { Signin, SignUp } from "../components/pages";
+import { Dashboard, Signin, SignUp } from "../components/pages";
 
 export const useRoutes = {
   SignIn: <Signin />,
   SignUp: <SignUp />,
-  Dashboard: "Dashboard",
+  Dashboard: <Dashboard />,
 };

@@ -7,7 +7,7 @@ import { FormController, FormTextField } from "../../form";
 import { useContext, useState } from "react";
 import { useTextField } from "../../../composables/useForm";
 import { useEmail, useMinLen } from "../../../composables/useRules";
-import { ScreenContext } from "../../../contexts";
+import { RouterContext, ScreenContext } from "../../../contexts";
 import { useScreenAlert } from "../../../composables/useScreen";
 import { useScreenLoading } from "../../../composables/useScreen";
 import firebaseService from "../../../services/firebaseService";
@@ -23,16 +23,21 @@ export default function Signin() {
   });
 
   const { appScreen, setAppScreen } = useContext(ScreenContext);
+  const { setCurrentRoute } = useContext(RouterContext);
 
   const handleSignIn = async (e) => {
     setAppScreen(useScreenLoading(true));
-    const { user, error } = await firebaseService.signIn(email, password);
+    const { user, error } = await firebaseService.signIn(
+      email.value,
+      password.value
+    );
     setAppScreen(useScreenLoading(false));
     if (error) {
       setAppScreen(useScreenAlert(error, "error"));
     }
     if (user) {
-      setAppScreen(useScreenAlert("Usuário entrou com sucesso!", "success"));
+      setAppScreen(useScreenAlert("Usuário conectado com sucesso!", "success"));
+      setCurrentRoute("Dashboard");
     }
   };
 
