@@ -19,7 +19,6 @@ export default function AppAuth({ children }) {
   return (
     <AuthContext.Provider value={{ currentUser, setCurrentUser }}>
       {children}
-      {/* {JSON.stringify(currentUser)} */}
     </AuthContext.Provider>
   );
 }

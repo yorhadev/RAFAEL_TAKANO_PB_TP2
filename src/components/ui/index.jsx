@@ -1,3 +1,4 @@
 import UiAlert from "./UiAlert";
+import UiNav from "./UiNav";
 
-export { UiAlert };
+export { UiAlert, UiNav };

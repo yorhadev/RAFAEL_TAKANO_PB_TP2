@@ -37,7 +37,7 @@ export default function Signin() {
     }
     if (user) {
       setAppScreen(useScreenAlert("Usuário conectado com sucesso!", "success"));
-      setCurrentRoute("Dashboard");
+      setCurrentRoute("Landing");
     }
   };
 
