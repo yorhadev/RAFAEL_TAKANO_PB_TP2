@@ -9,7 +9,7 @@ export default function SignInContainer({ children }) {
           flexDirection: "column",
           alignItems: "center",
           gap: 1,
-          marginTop: 10,
+          pt: 10,
         }}
       >
         {children}

@@ -65,6 +65,7 @@ function _NavBar({ children }) {
         bgcolor: "transparent",
         backgroundImage: "none",
         mt: 2,
+        zIndex: 1,
       }}
     >
       {children}

@@ -32,7 +32,7 @@ export default function UiAlert({ alert }) {
         left: "50%",
         transform: "translateX(-50%)",
         width: 500,
-        zIndex: 10,
+        zIndex: 2,
       }}
     >
       <Collapse in={collapse}>

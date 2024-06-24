@@ -9,7 +9,7 @@ export default function SignUpContainer({ children }) {
           flexDirection: "column",
           alignItems: "center",
           gap: 1,
-          marginTop: 10,
+          pt: 10,
         }}
       >
         {children}
