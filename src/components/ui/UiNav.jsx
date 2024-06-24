@@ -8,11 +8,21 @@ import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavTheme } from "../../composables/useTheme";
+import firebaseService from "../../services/firebaseService";
+import { ScreenContext } from "../../contexts";
+import { useScreenAlert } from "../../composables/useScreen";
 
 export default function UiNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { setAppScreen } = useContext(ScreenContext);
+
+  const handleSignOut = async () => {
+    const { error } = await firebaseService.signOut();
+    if (error) return setAppScreen(useScreenAlert(error, "error"));
+    setAppScreen(useScreenAlert("Desconectado com sucesso!", "success"));
+  };
 
   return (
     <_NavBar>
@@ -28,7 +38,9 @@ export default function UiNav() {
             </_NavMenuWrapper>
           </_NavMenu>
           <_NavControls>
-            <_NavButton size="small">Sair</_NavButton>
+            <_NavButton size="small" onClick={handleSignOut}>
+              Sair
+            </_NavButton>
           </_NavControls>
           <_NavMenuMobile>
             <_NavMenuMobileHamburguer
@@ -44,7 +56,11 @@ export default function UiNav() {
               <_NavMenuMobileItem>Fornecedores</_NavMenuMobileItem>
               <Divider />
               <_NavMenuMobileItem>
-                <_NavButton variant="outlined" sx={{ width: "100%" }}>
+                <_NavButton
+                  variant="outlined"
+                  sx={{ width: "100%" }}
+                  onClick={handleSignOut}
+                >
                   Sair
                 </_NavButton>
               </_NavMenuMobileItem>
@@ -154,7 +170,14 @@ function _NavButton({
   onClick = () => {},
 }) {
   return (
-    <Button color="primary" variant={variant} size={size} component="a" sx={sx}>
+    <Button
+      color="primary"
+      variant={variant}
+      size={size}
+      component="a"
+      sx={sx}
+      onClick={onClick}
+    >
       {children}
     </Button>
   );

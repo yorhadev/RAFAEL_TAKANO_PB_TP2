@@ -43,6 +43,16 @@ class FirebaseService {
       return { user: null, error: error.message };
     }
   }
+
+  async signOut() {
+    try {
+      const user = await this.auth.signOut();
+      return { user: null, error: null };
+    } catch (error) {
+      console.error(error);
+      return { user: null, error: error.message };
+    }
+  }
 }
 
 const firebaseService = new FirebaseService();
