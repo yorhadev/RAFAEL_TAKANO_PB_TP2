@@ -11,13 +11,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useContext, useState } from "react";
 import { useNavTheme } from "../../composables/useTheme";
 import firebaseService from "../../services/firebaseService";
-import { ScreenContext } from "../../contexts";
+import { RouterContext, ScreenContext } from "../../contexts";
 import { useScreenAlert } from "../../composables/useScreen";
 
 export default function UiNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { setAppScreen } = useContext(ScreenContext);
+  const { setCurrentRoute } = useContext(RouterContext);
 
+  const handleRoute = (route) => {
+    setCurrentRoute(route);
+  };
   const handleSignOut = async () => {
     const { error } = await firebaseService.signOut();
     if (error) return setAppScreen(useScreenAlert(error, "error"));
@@ -29,9 +33,11 @@ export default function UiNav() {
       <_NavContainer>
         <_NavToolbar sx={useNavTheme}>
           <_NavMenu>
-            <_NavLogo />
+            <_NavLogo onClick={(e) => handleRoute("Landing")} />
             <_NavMenuWrapper>
-              <_NavMenuItem>Produtos</_NavMenuItem>
+              <_NavMenuItem onClick={(e) => handleRoute("Products")}>
+                Produtos
+              </_NavMenuItem>
               <_NavMenuItem>Cotações</_NavMenuItem>
               <_NavMenuItem>Contatos</_NavMenuItem>
               <_NavMenuItem>Fornecedores</_NavMenuItem>
@@ -117,9 +123,14 @@ function _NavMenu({ children }) {
   );
 }
 
-function _NavLogo() {
+function _NavLogo({ onClick = () => {} }) {
   return (
-    <Typography component="div" variant="h6" sx={{ pl: 2, cursor: "pointer" }}>
+    <Typography
+      component="div"
+      variant="h6"
+      sx={{ pl: 2, cursor: "pointer" }}
+      onClick={onClick}
+    >
       <Box component="span" sx={{ color: "primary.main" }}>
         GENERICO
       </Box>
@@ -220,23 +231,4 @@ function _NavMenuMobileDrawer({ children, open = false, onClose = () => {} }) {
 
 function _NavMenuMobileItem({ children, onClick = () => {} }) {
   return <MenuItem onClick={onClick}>{children}</MenuItem>;
-}
-
-function _XD({ children }) {
-  return (
-    <Box
-      id="hero"
-      sx={(theme) => ({
-        width: "100%",
-        backgroundImage:
-          theme.palette.mode === "light"
-            ? "linear-gradient(180deg, #CEE5FD, #FFF)"
-            : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
-        backgroundSize: "100% 20%",
-        backgroundRepeat: "no-repeat",
-      })}
-    >
-      {children}
-    </Box>
-  );
 }
