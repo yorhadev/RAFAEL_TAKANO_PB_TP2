@@ -41,7 +41,9 @@ export default function UiNav() {
               <_NavMenuItem onClick={(e) => handleRoute("Quotes")}>
                 Cotações
               </_NavMenuItem>
-              <_NavMenuItem>Contatos</_NavMenuItem>
+              <_NavMenuItem onClick={(e) => handleRoute("Contacts")}>
+                Contatos
+              </_NavMenuItem>
               <_NavMenuItem onClick={(e) => handleRoute("Suppliers")}>
                 Fornecedores
               </_NavMenuItem>
@@ -66,7 +68,9 @@ export default function UiNav() {
               <_NavMenuMobileItem onClick={(e) => handleRoute("Quotes")}>
                 Cotações
               </_NavMenuMobileItem>
-              <_NavMenuMobileItem>Contatos</_NavMenuMobileItem>
+              <_NavMenuMobileItem onClick={(e) => handleRoute("Contacts")}>
+                Contatos
+              </_NavMenuMobileItem>
               <_NavMenuMobileItem onClick={(e) => handleRoute("Suppliers")}>
                 Fornecedores
               </_NavMenuMobileItem>

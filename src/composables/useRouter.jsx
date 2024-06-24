@@ -1,4 +1,5 @@
 import {
+  Contacts,
   Landing,
   Products,
   Quotes,
@@ -8,6 +9,7 @@ import {
 } from "../components/pages";
 
 export const useRoutes = {
+  Contacts: <Contacts />,
   Landing: <Landing />,
   Products: <Products />,
   Quotes: <Quotes />,
