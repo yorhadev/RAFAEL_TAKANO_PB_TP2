@@ -1,11 +1,19 @@
-import { Landing, Products, Quotes, Signin, SignUp } from "../components/pages";
+import {
+  Landing,
+  Products,
+  Quotes,
+  Signin,
+  SignUp,
+  Suppliers,
+} from "../components/pages";
 
 export const useRoutes = {
-  SignIn: <Signin />,
-  SignUp: <SignUp />,
+  Landing: <Landing />,
   Products: <Products />,
   Quotes: <Quotes />,
-  Landing: <Landing />,
+  SignIn: <Signin />,
+  SignUp: <SignUp />,
+  Suppliers: <Suppliers />,
 };
 
 export const useStoreRoute = (route) => {

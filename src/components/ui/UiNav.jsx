@@ -42,7 +42,9 @@ export default function UiNav() {
                 Cotações
               </_NavMenuItem>
               <_NavMenuItem>Contatos</_NavMenuItem>
-              <_NavMenuItem>Fornecedores</_NavMenuItem>
+              <_NavMenuItem onClick={(e) => handleRoute("Suppliers")}>
+                Fornecedores
+              </_NavMenuItem>
             </_NavMenuWrapper>
           </_NavMenu>
           <_NavControls>
@@ -65,7 +67,9 @@ export default function UiNav() {
                 Cotações
               </_NavMenuMobileItem>
               <_NavMenuMobileItem>Contatos</_NavMenuMobileItem>
-              <_NavMenuMobileItem>Fornecedores</_NavMenuMobileItem>
+              <_NavMenuMobileItem onClick={(e) => handleRoute("Suppliers")}>
+                Fornecedores
+              </_NavMenuMobileItem>
               <Divider />
               <_NavMenuMobileItem>
                 <_NavButton
