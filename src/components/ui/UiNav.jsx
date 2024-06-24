@@ -38,7 +38,9 @@ export default function UiNav() {
               <_NavMenuItem onClick={(e) => handleRoute("Products")}>
                 Produtos
               </_NavMenuItem>
-              <_NavMenuItem>Cotações</_NavMenuItem>
+              <_NavMenuItem onClick={(e) => handleRoute("Quotes")}>
+                Cotações
+              </_NavMenuItem>
               <_NavMenuItem>Contatos</_NavMenuItem>
               <_NavMenuItem>Fornecedores</_NavMenuItem>
             </_NavMenuWrapper>
@@ -56,8 +58,12 @@ export default function UiNav() {
               open={mobileMenuOpen}
               onClose={(e) => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              <_NavMenuMobileItem>Produtos</_NavMenuMobileItem>
-              <_NavMenuMobileItem>Cotações</_NavMenuMobileItem>
+              <_NavMenuMobileItem onClick={(e) => handleRoute("Products")}>
+                Produtos
+              </_NavMenuMobileItem>
+              <_NavMenuMobileItem onClick={(e) => handleRoute("Quotes")}>
+                Cotações
+              </_NavMenuMobileItem>
               <_NavMenuMobileItem>Contatos</_NavMenuMobileItem>
               <_NavMenuMobileItem>Fornecedores</_NavMenuMobileItem>
               <Divider />

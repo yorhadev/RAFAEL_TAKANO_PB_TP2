@@ -1,9 +1,10 @@
-import { Landing, Products, Signin, SignUp } from "../components/pages";
+import { Landing, Products, Quotes, Signin, SignUp } from "../components/pages";
 
 export const useRoutes = {
   SignIn: <Signin />,
   SignUp: <SignUp />,
   Products: <Products />,
+  Quotes: <Quotes />,
   Landing: <Landing />,
 };
 
