@@ -12,3 +12,8 @@ export const useMinLen = (str) => {
 export const useRequired = (str) => {
   return !!str;
 };
+
+export const useNumber = (str) => {
+  if (!str) return false;
+  return !isNaN(str);
+};

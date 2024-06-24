@@ -1,5 +1,5 @@
 import { default as Container } from "./ProductsContainer";
-import ProductsForm from "./ProductsForm";
+import { default as TableForm } from "./ProductsForm";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
@@ -91,7 +91,7 @@ export default function Products() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      <ProductsForm rows={rows} setRows={setRows}></ProductsForm>
+      <TableForm rows={rows} setRows={setRows} />
     </Container>
   );
 }
